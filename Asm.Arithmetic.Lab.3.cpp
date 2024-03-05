@@ -94,35 +94,38 @@ int main()
     std::cout << "Enter numb1 and numb2 values in fraction numb1/numb2:" << std::endl;
     std::cin >> numb1 >> numb2;
     int num1 = numb1, num2 = numb2;
-    std::cout << std::endl;
-   /*__asm
+    std::cout << std::endl;  
+
+    std::cout << num1 << std::endl;
+
+   __asm
     {
-        
-        cmp num1, 0;
-        jae pos;
+       mov eax, 1
+       shl eax, 31
+        and eax, numb1;
+        jz pos;
         neg num1;
-    alg1:
+        neg numb1;
+    NOD1:
         mov edx, 0;
-        mov eax, ecx;
+        mov eax, num1;
         div num2;
         cmp edx, 0;
         jz exit1;
         mov ebx, num2;
-        mov ecx, ebx;
+        mov num1, ebx;
         mov num2, edx;
-        jmp alg1;
+        jmp NOD1;
     exit1:
         mov eax, numb1;
-        neg eax;
         div num2;
         mov numb1, eax;
+        neg numb1;
         mov eax, numb2;
         div num2;
-        mov numb2, eax;
-
-        jmp exit;
+        jmp ex;
     pos:
-    alg2:
+    NOD2:
         mov edx, 0;
         mov eax, num1;
         div num2;
@@ -131,60 +134,18 @@ int main()
         mov ebx, num2;
         mov num1, ebx;
         mov num2, edx;
-        jmp alg2;
+        jmp NOD2;
     exit2:
         mov eax, numb1;
         div num2;
         mov numb1, eax;
         mov eax, numb2;
         div num2;
-        mov numb2, eax;
-    exit:
+    ex:
+        mov numb2, eax
     }
-    */
-    /*__asm {
-        cmp numb1, 0;
-        jae neg_;
-    alg2:
-        mov edx, 0;
-        mov eax, num1;
-        div num2;
-        cmp edx, 0;
-        jz exit2;
-        mov ebx, num2;
-        mov num1, ebx;
-        mov num2, edx;
-        jmp alg2;
-    exit2:
-        mov eax, numb1;
-        div num2;
-        mov numb1, eax;
-        mov eax, numb2;
-        div num2;
-        mov numb2, eax;
-        jmp exit;
-    neg_:
-    alg1:
-        mov edx, 0;
-        mov eax, ecx;
-        div num2;
-        cmp edx, 0;
-        jz exit1;
-        mov ebx, num2;
-        mov ecx, ebx;
-        mov num2, edx;
-        jmp alg1;
-    exit1:
-        mov eax, numb1;
-        neg eax;
-        div num2;
-        mov numb1, eax;
-        mov eax, numb2;
-        div num2;
-        mov numb2, eax;
-    exit:
-
-    }*/
+    
+    
     std::cout << "Result: " << numb1 << "/" << numb2 << std::endl;
     return 0;
 }
